@@ -1,0 +1,19 @@
+{% extends "base.html" %}
+
+{% block title_block %}
+    All Users
+{% endblock  %}
+
+{% block body_block %}
+    <div class="row">
+        {%for user in users %}
+        {% if user.is_staff == False %}
+            <div class="col-sm-3">
+                <p><a href="{% url 'App_Bazar:others_bazar' pk=user.pk %}">{{user.profile.full_name}}</a></p>
+            </div>
+        {% endif %}
+    {% endfor %}
+      
+    </div>
+  
+{% endblock  %}

@@ -1,0 +1,27 @@
+{% extends "base.html" %}
+
+{% block title_block %}
+    Bazar histories
+{% endblock  %}
+
+{% block body_block %}
+    {% if has_categories %}
+        <a href="{% url 'App_Bazar:user_categories' %}" class=" fw-bold">My added categories</a>
+    {% endif %}
+    <br>
+    <a href="{% url 'App_Bazar:add_category' %}" class="btn btn-warning btn-sm my-2">Add new Category</a>
+    <br>
+    <br>
+    <h2>My bazars</h2>
+  
+    {% if user.author_bazar.count > 0%}
+        {% for bazar in user.author_bazar.all %}
+            <p>{{ bazar.name }} {{ bazar.weight }}kg -> {{ bazar.total_cost }}&#2547; </p>
+            <a href="{% url 'App_Bazar:edit_bazar' pk=bazar.pk %}" class="btn btn-warning btn-sm">Edit</a>
+            <a href="{% url 'App_Bazar:delete_bazar' pk=bazar.pk %}" class="btn btn-danger btn-sm" onclick="return confirm('Delete Bazar?')">Delete</a>
+        {% endfor %}
+        {% else %}
+        <h6>Please do Bazar :p</h6>
+    {% endif %}
+
+{% endblock  %}

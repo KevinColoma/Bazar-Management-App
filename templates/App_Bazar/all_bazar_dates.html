@@ -1,0 +1,20 @@
+{% extends "base.html" %}
+
+{% block title_block %}
+    Bazar Histories
+{% endblock  %}
+
+{% block body_block %}
+    {% if bazar_dates %}
+        <h2>Bazar Histories</h2> <ul>
+        {% for date in bazar_dates %}
+            
+                <li><a href="{% url 'App_Bazar:sorted_bazar'  date|date:'Y-m-d'  %}">{{ date }}</a></li>
+            
+        {% endfor %}
+    </ul>
+    {% else %}
+    <h3>No bazars yet xD</h3>
+    {% endif %}
+   
+{% endblock  %}

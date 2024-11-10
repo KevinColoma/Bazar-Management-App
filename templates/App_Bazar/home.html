@@ -1,0 +1,34 @@
+{% extends "base.html" %}
+{% load crispy_forms_tags %}
+{% block title_block %}
+    Bazar App
+{% endblock  %}
+
+{% block body_block %}
+    <h2 class="text-center">Our Bazar App</h2>
+    <h4><a href=" {% url 'App_Login:all_users' %}">Total Bazar Cost: </a>{{ total_cost }}&#2547;</h4>
+    <h5>My Total Bazar: {{ user.author_bazar.first.all_bazar_cost }} &#2547;</h5>
+
+    <div class="row py-5">
+        <div class="col-sm-8">
+            <form method="POST">
+                {{ form|crispy }}
+                {% csrf_token %}
+                <button type="submit" class="btn btn-success btn-sm">Add Bazar</button>
+            </form>
+        </div>
+        <div class="col-sm-4">
+            <h4 class="fw-bold">Bazar History:</h4>
+            <br>
+            {% for bazar in user.author_bazar.all %}
+                <p>{{bazar.name}} {{bazar.weight}}kg -> {{bazar.total_cost }}&#2547;</p>
+                <small>{{ bazar.publish_date }}</small>
+                {% endfor %}
+                <br>
+                <br>
+                <a href="{% url 'App_Bazar:history' %}" class="btn btn-warning btn-sm">Update user histories</a>
+        </div>
+    </div>
+
+  
+{% endblock  %}

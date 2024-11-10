@@ -1,0 +1,37 @@
+{% extends "base.html" %}
+
+{% block title_block %}
+    User Bazar History
+{% endblock  %}
+
+{% block body_block %}
+    {% if has_categories %}
+        <h6>{{bazar_user.profile.username}}'s added Categories: </h6>
+        {% for category in categories %}
+            <small>{{ category.name }}</small>
+            <br>
+        {% endfor %}
+    {% endif %}
+    <br>
+    <h3>{{bazar_user.profile.username}}'s Bazar History</h3>
+    <br>
+
+    <div class="row">
+        {% if bazars %}
+            <div class="col-sm-12">
+                {% for bazar in bazars %}
+                    <p>{{bazar.name}} {{bazar.weight}}kg -> {{bazar.total_cost }}&#2547; ->   {{ bazar.publish_date }}</p>
+                    
+                
+                {% endfor %}
+            </div>
+            <hr>
+            <h6>Total Bazar: {{ bazar_user.author_bazar.first.all_bazar_cost }} &#2547;</h6>
+            {% else %}
+            <h6>{{bazar_user.profile.username}} hasn't started bazar yet :p</h6>
+        {% endif %}
+       
+   
+    </div>
+   
+{% endblock  %}

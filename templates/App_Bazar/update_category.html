@@ -1,0 +1,14 @@
+{% extends "base.html" %}
+{% block title_block %}
+{% load crispy_forms_tags %}
+    Update Category
+{% endblock  %}
+
+{% block body_block %}
+    <h4>Update Category</h4>
+    <form method="POST">
+        {{ form|crispy }}
+        {% csrf_token %}
+        <button type="submit" class="btn btn-warning btn-sm">Update Category</button>
+    </form>
+{% endblock  %}

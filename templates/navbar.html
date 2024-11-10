@@ -1,0 +1,58 @@
+
+{% block body_block%}
+<nav class="navbar navbar-expand-lg bg-danger">
+  <div class="container">
+    {% if user.is_authenticated %}
+      <a class="navbar-brand text-light fw-bold" href="{% url 'App_Bazar:home' %}">Home</a>
+    {% endif %}
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarNavDropdown">
+      <ul class="navbar-nav ms-auto text-center">
+        {% if user.is_authenticated %}
+          <li class="nav-item">
+            <a class="nav-link text-light" href="{% url 'App_Bazar:query' %}">Ask Bazar Menu</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link text-light" href="{% url 'App_Bazar:pending_bazars' %}">Pending Bazars</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link text-light" href="{% url 'App_Bazar:add_category' %}">Add Category</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link text-light" href="{% url 'App_Login:all_users' %}">Other Users</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link text-light" href="{% url 'App_Bazar:bazar_history' %}">Bazar History</a>
+          </li>
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle text-light" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+              {% if user.profile.profile_pic %}
+                  <img src="/media/{{user.profile.profile_pic}}" width="50" class="rounded-circle img-fluid" alt="">
+              {% else %}
+                  <img src="/media/avatar.jpg" width="50" class="rounded-circle img-fluid" alt="">
+              {% endif %}
+              {% comment %} @{{ user.profile.username }} {% endcomment %}
+            </a>
+            <ul class="dropdown-menu">
+              <li><a class="dropdown-item" href="{% url 'App_Login:profile' %}">Profile</a></li>
+              <li><hr class="dropdown-divider"></li>
+              <li><a class="dropdown-item" href="{% url 'App_Login:logout' %}">Logout</a></li>
+            </ul>
+          </li>
+          {% else %}
+          <li class="nav-item">
+            <a class="nav-link text-light" aria-current="page" href="{% url 'App_Login:login' %}">Login</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link text-light" aria-current="page" href="{% url 'App_Login:signup' %}">Sign Up</a>
+          </li>
+
+        {% endif %}
+       
+      </ul>
+    </div>
+  </div>
+</nav>
+{% endblock %}

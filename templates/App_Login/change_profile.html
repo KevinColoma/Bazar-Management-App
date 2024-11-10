@@ -1,0 +1,28 @@
+{% extends "base.html" %}
+{% block title_block %}
+    Profile
+{% endblock  %}
+{% load crispy_forms_tags %}
+
+{% block body_block %}
+    <h2>User Profile: </h2>
+    <div class="row">
+        <div class="col-sm-8">
+            <form method="POST" enctype="multipart/form-data">
+                {{ form|crispy }}
+                {% csrf_token %}
+                <button type="submit" class="btn btn-warning btn-sm">Update Profile</button>
+            </form>
+            <hr>
+            <a href="{% url 'App_Login:change_password' %}" class="btn btn-info">Change Password</a>
+        </div>
+        <div class="col-sm-4">
+            <img src="/media/{{user.profile.profile_pic}}" class="img-fluid mx-auto d-block rounded-circle" width="200" height="200" alt="">
+            <h6 class="text-center my-3">{{user.profile.username}}</h6>
+            <p><b>Full name: </b>{{user.profile.full_name}}</p>
+            <p><b>Address: </b>{{user.profile.address_1}}, {{user.profile.city}}, {{user.profile.country}}</p>
+            <p><b>Contact information:</b> {{user.profile.phone}}</p>
+        </div>
+    </div>
+ 
+{% endblock  %}

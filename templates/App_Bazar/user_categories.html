@@ -1,0 +1,12 @@
+{% extends "base.html" %}
+{% block title_block %}
+    My Categories
+{% endblock  %}
+
+{% block body_block %}
+    {% for category in categories %}
+        <p>{{category.name}}</p>
+        <a href="{% url 'App_Bazar:update_category' pk=category.pk %}" class="btn btn-warning btn-sm">Update</a>
+        <a href="{% url 'App_Bazar:delete_category' pk=category.pk %}" class="btn btn-danger btn-sm" onclick="return confirm('Delete Category?')">Delete</a>
+    {% endfor %}
+{% endblock  %}

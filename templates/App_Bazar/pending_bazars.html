@@ -1,0 +1,26 @@
+{% extends "base.html" %}
+
+{% block title_block %}
+    Pending Bazars!!!
+{% endblock  %}
+
+{% block body_block %}
+    {% if not pending_bazars %}
+        <h3>No pending bazars. Chill!!! :D</h3>
+        {% else %}
+        {% for pending_bazar in pending_bazars %}
+        <p>{{pending_bazar.name}}</p>
+        <div class="d-flex">
+                {% if pending_bazar.author.pk == user.pk %}
+                    <a href="{% url 'App_Bazar:update_pending_bazar' pk=pending_bazar.pk %}" class="btn btn-warning ">Update</a>
+                {% endif %}
+                <a href="{% url 'App_Bazar:complete_pending_bazar' pk=pending_bazar.pk %}" class=" ms-2 btn btn-danger " onclick="return confirm('Want to mark as completed?')">Done</a>
+            </div>
+       
+        <br>
+    {% endfor %}
+    {% endif %}
+  
+        <hr>
+        <a href="{% url 'App_Bazar:add_pending_bazar' %}" class="btn btn-primary btn-sm">Add Bazar</a>
+{% endblock  %}

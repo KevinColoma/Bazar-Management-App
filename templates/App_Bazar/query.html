@@ -1,0 +1,26 @@
+{% extends "base.html" %}
+{% block title_block %}
+    Ask AI
+{% endblock  %}
+{% load crispy_forms_tags %}
+{% load static %}
+
+{% block body_block %}
+        <div class="mx-auto">
+            <center class="">
+                <form method="POST">
+                    {{ form | crispy }}
+                    {% csrf_token %}
+                    <button type="submit" class="btn btn-danger btn-sm" style="width:100%">Ask Question</button>
+                </form>
+            </center>
+
+        </div>
+        {% if answer is None %}
+        <p></p>
+        {% else %}
+        <p class="text-center">{{ answer }}</p>
+        {% endif %}
+   
+
+{% endblock  %}

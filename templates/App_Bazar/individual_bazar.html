@@ -1,0 +1,11 @@
+{% extends "base.html" %}
+
+{% block title_block %}
+    View Bazar By Dates
+{% endblock  %}
+
+{% block body_block %}
+    {% for bazar in bazars %}
+        <p>{{ bazar.name }} {{ bazar.weight }}kg -> {{ bazar.total_cost }}&#2547; by {{ bazar.author.profile.username }}</p>
+    {% endfor %}
+{% endblock  %}
