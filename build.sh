@@ -11,7 +11,8 @@ python manage.py collectstatic --no-input
 echo "🗄️  Ejecutando migraciones..."
 python manage.py migrate
 
-echo "👤 Creando superusuario..."
-python manage.py create_superuser_auto
+echo "👤 Creando superusuario automáticamente..."
+python manage.py create_superuser_auto || echo "❌ Error creando superusuario"
 
 echo "✅ Build completado exitosamente!"
+echo "🔑 Credenciales: admin@bazar.com / admin123"
