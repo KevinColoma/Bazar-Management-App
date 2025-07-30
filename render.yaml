@@ -1,0 +1,22 @@
+databases:
+  - name: bazar-postgres
+    databaseName: bazar_db
+    user: bazar_user
+
+services:
+  - type: web
+    name: bazar-management-app
+    env: python
+    buildCommand: "./build.sh"
+    startCommand: "gunicorn BAZAR_APP.wsgi:application"
+    envVars:
+      - key: DATABASE_URL
+        fromDatabase:
+          name: bazar-postgres
+          property: connectionString
+      - key: SECRET_KEY
+        generateValue: true
+      - key: DEBUG
+        value: False
+      - key: ALLOWED_HOSTS
+        value: ".onrender.com"
